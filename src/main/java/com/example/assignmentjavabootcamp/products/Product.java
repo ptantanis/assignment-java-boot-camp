@@ -3,17 +3,26 @@ package com.example.assignmentjavabootcamp.products;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @NamedQueries({
-        @NamedQuery(name = "Products.findAll", query = "select p from Products p")
+        @NamedQuery(name = "Product.findAll", query = "select p from Product p")
 })
-public class Products {
+public class Product {
+
     @Id
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -23,11 +32,4 @@ public class Products {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
