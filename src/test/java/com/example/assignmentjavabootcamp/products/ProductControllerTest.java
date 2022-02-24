@@ -31,9 +31,7 @@ class ProductControllerTest {
     @Test
     void search_products_success() {
         // Arrange
-        Product expectedProduct = new Product();
-        expectedProduct.setId(2134);
-        expectedProduct.setName("expectedProduct name");
+        Product expectedProduct = new Product(2134, "expectedProduct name");
 
         List<Product> expectedProducts = Arrays.asList(expectedProduct);
         when(productService.findByName("test")).thenReturn(expectedProducts);

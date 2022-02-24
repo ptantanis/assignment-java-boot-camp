@@ -9,6 +9,14 @@ import javax.persistence.*;
 })
 public class Product {
 
+    public Product() {
+    }
+
+    public Product(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     private int id;
