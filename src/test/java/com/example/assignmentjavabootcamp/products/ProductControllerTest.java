@@ -43,6 +43,9 @@ class ProductControllerTest {
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertThat(response.getBody().getProducts().get(0), is(samePropertyValuesAs(expectedProduct)));
+
+        List<Product> actualProducts = response.getBody().getProducts();
+        assertThat(actualProducts, hasSize(expectedProducts.size()));
+        assertThat(actualProducts.get(0), is(samePropertyValuesAs(expectedProduct)));
     }
 }
