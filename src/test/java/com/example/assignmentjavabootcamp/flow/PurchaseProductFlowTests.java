@@ -5,8 +5,7 @@ import com.example.assignmentjavabootcamp.cart.GetAllCartItemResponse;
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductRepository;
 import com.example.assignmentjavabootcamp.product.SearchProductsResponse;
-import com.example.assignmentjavabootcamp.user.User;
-import com.example.assignmentjavabootcamp.user.UserRepository;
+import com.example.assignmentjavabootcamp.user.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,29 @@ public class PurchaseProductFlowTests {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     private Product chosenProduct;
+
+    private Address expectedAddress;
 
     @BeforeEach
     void setUp() {
         User user = new User();
         user.setId(1);
         userRepository.save(user);
+
+        expectedAddress = new Address();
+        expectedAddress.setId(1);
+        expectedAddress.setUser(user);
+        expectedAddress.setName("John doe");
+        expectedAddress.setAddress("1/234 Mary road");
+        expectedAddress.setPostCode("5000");
+        expectedAddress.setSubProvince("Bang pra");
+        expectedAddress.setProvince("krug thep");
+        addressRepository.save(expectedAddress);
+
 
         chosenProduct = new Product(2134, "addidas", 1324);
         chosenProduct.setDescription("this is product description");
@@ -87,5 +102,13 @@ public class PurchaseProductFlowTests {
         // Assert
         assertEquals(HttpStatus.OK, getAllCurrentUserCartItemResponse.getStatusCode());
         assertThat(getAllCurrentUserCartItemResponse.getBody().getCartItems(), hasSize(1));
+
+        // Get current user address
+        // Act
+        ResponseEntity<UserAddressResponse> getCurrentUserAddress = testRestTemplate.getForEntity("/api/users/current/addresses", UserAddressResponse.class);
+
+        // Assert
+        assertEquals(HttpStatus.OK, getCurrentUserAddress.getStatusCode());
+        assertThat(getCurrentUserAddress.getBody().getAddress(), samePropertyValuesAs(expectedAddress, "user"));
     }
 }
