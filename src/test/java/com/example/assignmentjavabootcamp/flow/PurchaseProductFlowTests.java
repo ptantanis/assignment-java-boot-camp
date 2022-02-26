@@ -1,6 +1,7 @@
 package com.example.assignmentjavabootcamp.flow;
 
 import com.example.assignmentjavabootcamp.cart.AddProductToCartRequest;
+import com.example.assignmentjavabootcamp.cart.GetAllCartItemResponse;
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductRepository;
 import com.example.assignmentjavabootcamp.product.SearchProductsResponse;
@@ -78,5 +79,13 @@ public class PurchaseProductFlowTests {
 
         // Assert
         assertEquals(HttpStatus.OK, addProductToCartResponse.getStatusCode());
+
+        // Get all current user cart items
+        // Act
+        ResponseEntity<GetAllCartItemResponse> getAllCurrentUserCartItemResponse = testRestTemplate.getForEntity("/api/carts", GetAllCartItemResponse.class);
+
+        // Assert
+        assertEquals(HttpStatus.OK, getAllCurrentUserCartItemResponse.getStatusCode());
+        assertThat(getAllCurrentUserCartItemResponse.getBody().getCartItems(), hasSize(1));
     }
 }
