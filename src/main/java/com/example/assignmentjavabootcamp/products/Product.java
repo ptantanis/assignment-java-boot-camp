@@ -1,6 +1,8 @@
 package com.example.assignmentjavabootcamp.products;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -27,6 +29,41 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private int price;
+
+    @Column(name = "picture_url")
+    private String pictureUrl;
+
+    @Column(name = "description")
+    private String description;
+
+    @ElementCollection
+    @Column(name = "size")
+    @CollectionTable(name = "product_size", joinColumns = @JoinColumn(name = "owner_id"))
+    private Set<String> size = new LinkedHashSet<>();
+
+    public Set<String> getSize() {
+        return size;
+    }
+
+    public void setSize(Set<String> size) {
+        this.size = size;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
 
     public int getPrice() {
         return price;
