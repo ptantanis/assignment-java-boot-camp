@@ -1,7 +1,7 @@
 package com.example.assignmentjavabootcamp.cart;
 
 import com.example.assignmentjavabootcamp.product.Product;
-import com.example.assignmentjavabootcamp.users.User;
+import com.example.assignmentjavabootcamp.user.User;
 
 public class CartTestHelper {
     public static CartItem generateCartItem(int id, User user) {

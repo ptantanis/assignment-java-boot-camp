@@ -1,9 +1,8 @@
 package com.example.assignmentjavabootcamp.cart;
 
-import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductRepository;
-import com.example.assignmentjavabootcamp.users.User;
-import com.example.assignmentjavabootcamp.users.UserRepository;
+import com.example.assignmentjavabootcamp.user.User;
+import com.example.assignmentjavabootcamp.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

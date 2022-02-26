@@ -1,4 +1,4 @@
-package com.example.assignmentjavabootcamp.users;
+package com.example.assignmentjavabootcamp.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -2,8 +2,8 @@ package com.example.assignmentjavabootcamp.cart;
 
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductService;
-import com.example.assignmentjavabootcamp.users.User;
-import com.example.assignmentjavabootcamp.users.UserService;
+import com.example.assignmentjavabootcamp.user.User;
+import com.example.assignmentjavabootcamp.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
