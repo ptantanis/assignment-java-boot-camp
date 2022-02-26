@@ -4,6 +4,7 @@ import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductService;
 import com.example.assignmentjavabootcamp.users.User;
 import com.example.assignmentjavabootcamp.users.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -33,15 +34,22 @@ class CartServiceTest {
     @Mock
     private UserService userService;
 
+    private CartService cartService;
+
+    @BeforeEach
+    void setUp() {
+        cartService = new CartService();
+        cartService.setProductService(productService);
+        cartService.setCartItemRepository(cartItemRepository);
+        cartService.setUserService(userService);
+
+    }
+
     @Test
     void add_product_to_cart_throw_product_not_found() {
         // Arrange
         int productId = 123;
         when(productService.findById(productId)).thenReturn(Optional.empty());
-
-        // Act
-        CartService cartService = new CartService();
-        cartService.setProductService(productService);
 
         // Assert
         ProductNotFoundException exception = assertThrows(ProductNotFoundException.class,() -> cartService.addProduct(productId, "S"));
@@ -56,10 +64,6 @@ class CartServiceTest {
         Product product = new Product(productId, "product name", 1234);
         product.setSize(new LinkedHashSet<>(Arrays.asList("M", "L")));
         when(productService.findById(productId)).thenReturn(Optional.of(product));
-
-        // Act
-        CartService cartService = new CartService();
-        cartService.setProductService(productService);
 
         // Assert
         ProductSizeNotFoundException exception = assertThrows(ProductSizeNotFoundException.class,() -> cartService.addProduct(productId, "S"));
@@ -79,12 +83,6 @@ class CartServiceTest {
 
         User expectedUser = new User();
         when(userService.getCurrentUser()).thenReturn(expectedUser);
-
-
-        CartService cartService = new CartService();
-        cartService.setProductService(productService);
-        cartService.setCartItemRepository(cartItemRepository);
-        cartService.setUserService(userService);
 
         // Act
         cartService.addProduct(productId, expectedSize);
