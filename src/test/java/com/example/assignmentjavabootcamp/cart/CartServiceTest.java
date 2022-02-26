@@ -10,10 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Optional;
+import java.util.*;
 
+import static com.example.assignmentjavabootcamp.cart.CartTestHelper.generateCartItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -94,6 +93,27 @@ class CartServiceTest {
             assertThat(cartItem.getUser(), is(samePropertyValuesAs(expectedUser)));
             return true;
         }));
+    }
 
+    @Test
+    void get_all_cart_item_success() {
+        // Arrange
+        User user = new User();
+        user.setId(1234);
+
+        CartItem cartItem1 = generateCartItem(1, user);
+        CartItem cartItem2 = generateCartItem(1, user);
+
+        when(userService.getCurrentUser()).thenReturn(user);
+
+        when(cartItemRepository.findByUser_Id(1234)).thenReturn(Arrays.asList(cartItem1, cartItem2));
+
+        // Act
+        List<CartItem> actual = cartService.getCurrentUserCartItem();
+
+        // Assert
+        assertThat(actual, is(hasSize(2)));
+        assertThat(actual, is(hasItem(cartItem1)));
+        assertThat(actual, is(hasItem(cartItem2)));
     }
 }

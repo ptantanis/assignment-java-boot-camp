@@ -2,10 +2,12 @@ package com.example.assignmentjavabootcamp.cart;
 
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductService;
+import com.example.assignmentjavabootcamp.users.User;
 import com.example.assignmentjavabootcamp.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +53,10 @@ public class CartService {
         cartItem.setUser(userService.getCurrentUser());
 
         cartItemRepository.save(cartItem);
+    }
+
+    public List<CartItem> getCurrentUserCartItem() {
+        User user = userService.getCurrentUser();
+        return cartItemRepository.findByUser_Id(user.getId());
     }
 }
