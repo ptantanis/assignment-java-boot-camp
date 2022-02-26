@@ -1,6 +1,6 @@
 package com.example.assignmentjavabootcamp.carts;
 
-import com.example.assignmentjavabootcamp.products.Product;
+import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.users.User;
 
 import javax.persistence.*;

@@ -1,8 +1,8 @@
 package com.example.assignmentjavabootcamp.flow;
 
-import com.example.assignmentjavabootcamp.products.Product;
-import com.example.assignmentjavabootcamp.products.ProductRepository;
-import com.example.assignmentjavabootcamp.products.SearchProductsResponse;
+import com.example.assignmentjavabootcamp.product.Product;
+import com.example.assignmentjavabootcamp.product.ProductRepository;
+import com.example.assignmentjavabootcamp.product.SearchProductsResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;

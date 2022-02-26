@@ -1,4 +1,4 @@
-package com.example.assignmentjavabootcamp.products;
+package com.example.assignmentjavabootcamp.product;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

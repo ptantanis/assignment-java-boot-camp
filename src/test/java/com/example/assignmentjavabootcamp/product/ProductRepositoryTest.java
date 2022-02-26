@@ -1,16 +1,13 @@
-package com.example.assignmentjavabootcamp.products;
+package com.example.assignmentjavabootcamp.product;
 
-import com.jayway.jsonpath.Criteria;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class ProductRepositoryTest {
