@@ -89,4 +89,8 @@ public class Product {
         this.name = name;
     }
 
+    public boolean hasSize(String size) {
+        return this.size.contains(size);
+    }
+
 }
