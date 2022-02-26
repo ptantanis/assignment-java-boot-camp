@@ -21,7 +21,7 @@ class ProductServiceTest {
     @Test
     void findByName() {
         // Arrange
-        Product expectedProduct = new Product(2134, "name with keyword");
+        Product expectedProduct = new Product(2134, "name with keyword", 1000);
         when(productRepository.findByNameContainsIgnoreCase("keyword")).thenReturn(Arrays.asList(expectedProduct));
 
         // Act

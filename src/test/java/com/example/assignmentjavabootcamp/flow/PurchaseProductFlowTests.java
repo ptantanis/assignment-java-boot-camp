@@ -28,9 +28,9 @@ public class PurchaseProductFlowTests {
 
     @BeforeEach
     void setUp() {
-        Product product1 = new Product(2134, "addidas");
-        Product product2 = new Product(2135, "not addidas");
-        Product product3 = new Product(2136, "another");
+        Product product1 = new Product(2134, "addidas", 1324);
+        Product product2 = new Product(2135, "not addidas", 234);
+        Product product3 = new Product(2136, "another", 432);
 
         productRepository.save(product1);
         productRepository.save(product2);

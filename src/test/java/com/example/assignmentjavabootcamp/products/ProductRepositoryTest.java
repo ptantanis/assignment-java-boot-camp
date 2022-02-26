@@ -21,8 +21,8 @@ class ProductRepositoryTest {
     @Test
     void findByName() {
         // Arrange
-        Product expectedProduct = new Product(2134, "name with keyword");
-        Product another = new Product(234, "another name");
+        Product expectedProduct = new Product(2134, "name with keyword", 100);
+        Product another = new Product(234, "another name", 100);
 
         productRepository.save(expectedProduct);
         productRepository.save(another);
