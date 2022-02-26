@@ -24,6 +24,17 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "price", nullable = false)
+    private int price;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
