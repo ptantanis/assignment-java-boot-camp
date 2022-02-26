@@ -1,4 +1,4 @@
-package com.example.assignmentjavabootcamp.carts;
+package com.example.assignmentjavabootcamp.cart;
 
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.users.User;

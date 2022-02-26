@@ -1,4 +1,4 @@
-package com.example.assignmentjavabootcamp.carts;
+package com.example.assignmentjavabootcamp.cart;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
