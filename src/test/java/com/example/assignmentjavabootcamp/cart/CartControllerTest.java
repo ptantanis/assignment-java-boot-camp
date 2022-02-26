@@ -2,6 +2,7 @@ package com.example.assignmentjavabootcamp.cart;
 
 import com.example.assignmentjavabootcamp.ErrorResponse;
 import com.example.assignmentjavabootcamp.product.Product;
+import com.example.assignmentjavabootcamp.users.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,9 +11,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Arrays;
+
+import static com.example.assignmentjavabootcamp.cart.CartTestHelper.generateCartItem;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -85,6 +88,25 @@ class CartControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertThat(response.getBody().getMessage(), is(containsString(String.valueOf(expectedProductId))));
         assertThat(response.getBody().getMessage(), is(containsString(expectedSize)));
+    }
+
+    @Test
+    void get_all_cart_item_of_current_user() {
+        // Arrange
+        User user = new User();
+        user.setId(1234);
+
+        CartItem cartItem1 = generateCartItem(1, user);
+        CartItem cartItem2 = generateCartItem(2, user);
+
+        when(cartService.getCurrentUserCartItem()).thenReturn(Arrays.asList(cartItem1, cartItem2));
+
+        // Act
+        ResponseEntity<GetAllCartItemResponse> response = testRestTemplate.getForEntity("/api/carts" , GetAllCartItemResponse.class);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertThat(response.getBody().getCartItems(), is(hasSize(2)));
     }
 
 }
