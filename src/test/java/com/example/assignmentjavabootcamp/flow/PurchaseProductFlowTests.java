@@ -2,6 +2,8 @@ package com.example.assignmentjavabootcamp.flow;
 
 import com.example.assignmentjavabootcamp.cart.AddProductToCartRequest;
 import com.example.assignmentjavabootcamp.cart.GetAllCartItemResponse;
+import com.example.assignmentjavabootcamp.payment.CreditCardGateway;
+import com.example.assignmentjavabootcamp.payment.CreditCardPaymentRequest;
 import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.product.ProductRepository;
 import com.example.assignmentjavabootcamp.product.SearchProductsResponse;
@@ -110,5 +112,18 @@ public class PurchaseProductFlowTests {
         // Assert
         assertEquals(HttpStatus.OK, getCurrentUserAddress.getStatusCode());
         assertThat(getCurrentUserAddress.getBody().getAddress(), samePropertyValuesAs(expectedAddress, "user"));
+
+        // Charge with credit card
+        // Act
+        CreditCardPaymentRequest paymentRequest = new CreditCardPaymentRequest();
+        paymentRequest.setCardNo("4000 6200 0000 0007");
+        paymentRequest.setName("John doe");
+        paymentRequest.setCvv("737");
+        paymentRequest.setExpiration_month(3);
+        paymentRequest.setExpiration_year(2030);
+        ResponseEntity paymentResponse = testRestTemplate.postForEntity("/api/payments/credit-card", paymentRequest, null);
+
+        // Assert
+        assertEquals(HttpStatus.OK, paymentResponse.getStatusCode());
     }
 }
