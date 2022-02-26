@@ -4,6 +4,7 @@ import com.example.assignmentjavabootcamp.product.Product;
 import com.example.assignmentjavabootcamp.user.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cart")
@@ -53,5 +54,9 @@ public class CartItem {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static int totalPrice(List<CartItem> cartItems) {
+        return cartItems.stream().mapToInt(cartItem -> cartItem.getProduct().getPrice()).sum();
     }
 }
