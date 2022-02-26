@@ -7,6 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -33,5 +34,22 @@ class ProductServiceTest {
         // Assert
         assertThat(actualProducts, hasSize(1));
         assertThat(actualProducts.get(0), is(samePropertyValuesAs(expectedProduct)));
+    }
+
+    @Test
+    void findById() {
+        // Arrange
+        Product expectedProduct = new Product(2134, "name with keyword", 1000);
+        when(productRepository.findById(2134)).thenReturn(Optional.of(expectedProduct));
+
+        // Act
+        ProductService service = new ProductService();
+        service.setProductRepository(productRepository);
+
+        Optional<Product> result = service.findById(2134);
+
+        // Assert
+        assertThat(result.isPresent(), is(true));
+        assertThat(result.get(), is(samePropertyValuesAs(expectedProduct)));
     }
 }
