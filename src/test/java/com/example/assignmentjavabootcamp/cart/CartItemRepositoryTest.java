@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
+import static com.example.assignmentjavabootcamp.cart.CartTestHelper.generateCartItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -54,15 +55,5 @@ class CartItemRepositoryTest {
 
         // Assert
         assertThat(cartItems, is(hasSize(2)));
-    }
-
-    private CartItem generateCartItem(int id, User user) {
-        Product product = new Product(id, "Product" + id, id * 100);
-        CartItem cartItem = new CartItem();
-        cartItem.setId(id);
-        cartItem.setSize("S");
-        cartItem.setProduct(product);
-        cartItem.setUser(user);
-        return cartItem;
     }
 }
