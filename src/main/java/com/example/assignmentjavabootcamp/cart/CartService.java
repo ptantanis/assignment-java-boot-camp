@@ -6,6 +6,7 @@ import com.example.assignmentjavabootcamp.user.User;
 import com.example.assignmentjavabootcamp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +59,11 @@ public class CartService {
     public List<CartItem> getCurrentUserCartItem() {
         User user = userService.getCurrentUser();
         return cartItemRepository.findByUser_Id(user.getId());
+    }
+
+    @Transactional
+    public void clearCart() {
+        User user = userService.getCurrentUser();
+        cartItemRepository.deleteByUser_Id(user.getId());
     }
 }
