@@ -31,6 +31,8 @@ public class PaymentController {
         gatewayRequest.setName(request.getName());
 
         creditCardGateway.charge(gatewayRequest);
+
+        cartService.clearCart();
     }
 
 }
