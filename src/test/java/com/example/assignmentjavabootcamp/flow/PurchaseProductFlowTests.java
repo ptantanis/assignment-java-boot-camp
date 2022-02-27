@@ -125,5 +125,13 @@ public class PurchaseProductFlowTests {
 
         // Assert
         assertEquals(HttpStatus.OK, paymentResponse.getStatusCode());
+
+        // Check No cart item
+        // Act
+        ResponseEntity<GetAllCartItemResponse> getEmptyCartItem = testRestTemplate.getForEntity("/api/carts", GetAllCartItemResponse.class);
+
+        // Assert
+        assertEquals(HttpStatus.OK, getEmptyCartItem.getStatusCode());
+        assertThat(getEmptyCartItem.getBody().getCartItems(), empty());
     }
 }
